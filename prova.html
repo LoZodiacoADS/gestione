@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prova di collegamento &middot; Lo Zodiaco</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper:#F2F2F1; --surface:#FFFFFF; --surface-2:#E9E9E7;
+    --ink:#15161A; --ink-2:#54565C; --ink-3:#828489;
+    --line:#D8D8D5; --line-strong:#C0C0BC;
+    --accent:#A81326; --accent-soft:#FAE5E7;
+    --ok:#2C6B49; --ok-soft:#E2EEE8;
+    --crit:#A81326; --crit-soft:#FAE3E5;
+    --f-display:'Newsreader', Georgia, serif;
+    --f-ui:'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --f-mono:'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#111113; --surface:#191A1D; --surface-2:#232427;
+      --ink:#EBEBE9; --ink-2:#A8A9AC; --ink-3:#7C7D81;
+      --line:#2D2E32; --line-strong:#3D3E43;
+      --accent:#F2606F; --accent-soft:#2E1A1D;
+      --ok:#7FC49B; --ok-soft:#18241D;
+      --crit:#F2606F; --crit-soft:#2E1A1D;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#111113; --surface:#191A1D; --surface-2:#232427;
+    --ink:#EBEBE9; --ink-2:#A8A9AC; --ink-3:#7C7D81;
+    --line:#2D2E32; --line-strong:#3D3E43;
+    --accent:#F2606F; --accent-soft:#2E1A1D;
+    --ok:#7FC49B; --ok-soft:#18241D;
+    --crit:#F2606F; --crit-soft:#2E1A1D;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--f-ui); font-size:15.5px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:560px; margin:0 auto; padding:40px 18px 80px; }
+  .kicker { font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent); font-weight:600; }
+  h1 { font-family:var(--f-display); font-size:34px; font-weight:600; letter-spacing:-0.02em; line-height:1.1; margin:10px 0 0; }
+  .lede { color:var(--ink-2); margin:12px 0 26px; }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:20px 22px; margin-bottom:14px; }
+  h2 { font-family:var(--f-display); font-size:20px; font-weight:600; margin:0 0 12px; }
+  label { display:block; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-3); font-weight:600; margin-bottom:5px; }
+  input { width:100%; font:inherit; color:var(--ink); background:var(--paper); border:1px solid var(--line-strong); border-radius:8px; padding:10px 12px; margin-bottom:14px; }
+  input:focus-visible { outline:2px solid var(--accent); outline-offset:1px; }
+  button { font:inherit; font-weight:600; cursor:pointer; border-radius:8px; padding:10px 18px; border:1px solid var(--ink); background:var(--ink); color:var(--paper); }
+  button:hover { opacity:.88; }
+  button.ghost { background:transparent; color:var(--ink-2); border-color:var(--line-strong); font-weight:500; }
+  button:disabled { opacity:.5; cursor:default; }
+  .riga { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .msg { border-radius:8px; padding:11px 14px; font-size:14px; margin-top:12px; }
+  .msg.ok { background:var(--ok-soft); color:var(--ok); }
+  .msg.no { background:var(--crit-soft); color:var(--crit); }
+  .chi { font-family:var(--f-mono); font-size:13px; color:var(--ink-2); background:var(--surface-2); padding:8px 12px; border-radius:8px; margin-bottom:14px; word-break:break-all; }
+  ol.esiti { list-style:none; margin:0; padding:0; }
+  ol.esiti li { display:flex; gap:11px; align-items:flex-start; padding:9px 0; border-bottom:1px solid var(--line); font-size:14.5px; }
+  ol.esiti li:last-child { border-bottom:0; padding-bottom:0; }
+  .pallino { flex:none; width:16px; height:16px; margin-top:3px; border-radius:50%; border:1.5px solid var(--line-strong); }
+  li.si .pallino { background:var(--ok); border-color:var(--ok); }
+  li.no .pallino { background:var(--crit); border-color:var(--crit); }
+  li.si .et { color:var(--ok); }
+  li.no .et { color:var(--crit); }
+  .et { font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-3); margin-left:auto; flex:none; }
+  footer { margin-top:26px; font-size:13px; color:var(--ink-3); }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Lo Zodiaco &middot; trasloco</div>
+  <h1>Prova di collegamento</h1>
+  <p class="lede">Questa pagina non serve alla gestione: serve solo a verificare che la catena regga, cioè che GitHub pubblichi, che Firebase riconosca chi entra e che le regole lascino passare la persona giusta.</p>
+
+  <div class="card" id="cardAccesso">
+    <h2>Entra</h2>
+    <label for="em">Indirizzo email</label>
+    <input id="em" type="email" autocomplete="username" placeholder="nome@esempio.it">
+    <label for="pw">Password</label>
+    <input id="pw" type="password" autocomplete="current-password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
+    <div class="riga"><button id="bEntra">Entra</button></div>
+    <div id="msgAccesso"></div>
+  </div>
+
+  <div class="card" id="cardDentro" hidden>
+    <h2>Sei dentro</h2>
+    <div class="chi" id="chi"></div>
+    <div class="riga">
+      <button id="bScrivi">Scrivi una riga di prova</button>
+      <button id="bEsci" class="ghost">Esci</button>
+    </div>
+    <div id="msgArchivio"></div>
+  </div>
+
+  <div class="card">
+    <h2>Esito</h2>
+    <ol class="esiti">
+      <li id="e1"><span class="pallino"></span><span>La pagina è online e Firebase risponde</span><span class="et">in attesa</span></li>
+      <li id="e2"><span class="pallino"></span><span>L'accesso con email e password funziona</span><span class="et">in attesa</span></li>
+      <li id="e3"><span class="pallino"></span><span>La scrittura nell'archivio funziona</span><span class="et">in attesa</span></li>
+      <li id="e4"><span class="pallino"></span><span>La rilettura restituisce quello che ho scritto</span><span class="et">in attesa</span></li>
+    </ol>
+  </div>
+
+  <footer>Quando tutti e quattro i pallini sono verdi, prova ad aprire lo stesso indirizzo in una finestra in incognito: deve chiederti di entrare e non deve mostrare niente.</footer>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getFirestore, doc, setDoc, getDoc, serverTimestamp }
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAXf9KsZMPjCLX7TYcaHHP-zqJZK-3vTGg",
+    authDomain: "lo-zodiaco.firebaseapp.com",
+    projectId: "lo-zodiaco",
+    storageBucket: "lo-zodiaco.firebasestorage.app",
+    messagingSenderId: "313508341177",
+    appId: "1:313508341177:web:695b329b6b898e34ab8268"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const $ = (id) => document.getElementById(id);
+
+  function segna(id, esito) {
+    const li = $(id);
+    li.classList.remove("si", "no");
+    li.classList.add(esito ? "si" : "no");
+    li.querySelector(".et").textContent = esito ? "fatto" : "fallito";
+  }
+
+  function dice(dove, testo, buono) {
+    $(dove).innerHTML = "";
+    if (!testo) return;
+    const d = document.createElement("div");
+    d.className = "msg " + (buono ? "ok" : "no");
+    d.textContent = testo;
+    $(dove).appendChild(d);
+  }
+
+  function traduci(e) {
+    const c = (e && e.code) || "";
+    if (c.indexOf("invalid-credential") > -1 || c.indexOf("wrong-password") > -1 || c.indexOf("user-not-found") > -1)
+      return "Email o password non corretti. Controlla che l'accesso sia stato creato nella console, sotto Authentication.";
+    if (c.indexOf("invalid-email") > -1) return "L'indirizzo email non è scritto correttamente.";
+    if (c.indexOf("too-many-requests") > -1) return "Troppi tentativi ravvicinati. Aspetta qualche minuto e riprova.";
+    if (c.indexOf("network-request-failed") > -1) return "Nessuna connessione verso Firebase. Se hai la VPN accesa, prova a spegnerla.";
+    if (c.indexOf("permission-denied") > -1) return "L'archivio ha risposto di no: le regole di sicurezza non permettono questa operazione. Controlla di averle pubblicate.";
+    if (c.indexOf("unavailable") > -1) return "L'archivio non risponde in questo momento. Riprova fra poco.";
+    return "Qualcosa non ha funzionato: " + (c || (e && e.message) || "errore sconosciuto");
+  }
+
+  segna("e1", true);
+
+  onAuthStateChanged(auth, (u) => {
+    if (u) {
+      $("cardAccesso").hidden = true;
+      $("cardDentro").hidden = false;
+      $("chi").textContent = u.email;
+      segna("e2", true);
+    } else {
+      $("cardAccesso").hidden = false;
+      $("cardDentro").hidden = true;
+      dice("msgArchivio", "", true);
+    }
+  });
+
+  $("bEntra").addEventListener("click", async () => {
+    const b = $("bEntra");
+    b.disabled = true;
+    dice("msgAccesso", "", true);
+    try {
+      await signInWithEmailAndPassword(auth, $("em").value.trim(), $("pw").value);
+      $("pw").value = "";
+    } catch (e) {
+      segna("e2", false);
+      dice("msgAccesso", traduci(e), false);
+    }
+    b.disabled = false;
+  });
+
+  $("pw").addEventListener("keydown", (ev) => { if (ev.key === "Enter") $("bEntra").click(); });
+
+  $("bEsci").addEventListener("click", () => signOut(auth));
+
+  $("bScrivi").addEventListener("click", async () => {
+    const b = $("bScrivi");
+    b.disabled = true;
+    dice("msgArchivio", "", true);
+    const ora = new Date().toLocaleString("it-IT");
+    try {
+      await setDoc(doc(db, "prova", "collegamento"), {
+        chi: auth.currentUser.email,
+        quando: ora,
+        salvatoIl: serverTimestamp()
+      });
+      segna("e3", true);
+    } catch (e) {
+      segna("e3", false);
+      dice("msgArchivio", traduci(e), false);
+      b.disabled = false;
+      return;
+    }
+    try {
+      const letto = await getDoc(doc(db, "prova", "collegamento"));
+      if (letto.exists()) {
+        const d = letto.data();
+        segna("e4", true);
+        dice("msgArchivio", "Scritto e riletto: " + d.chi + ", " + d.quando + ".", true);
+      } else {
+        segna("e4", false);
+        dice("msgArchivio", "La scrittura è andata a buon fine ma la rilettura non trova niente.", false);
+      }
+    } catch (e) {
+      segna("e4", false);
+      dice("msgArchivio", traduci(e), false);
+    }
+    b.disabled = false;
+  });
+</script>
+</body>
+</html>
